@@ -1,0 +1,6 @@
+numpy
+tensorflow
+cloudpickle
+matplotlib
+keras
+opencv-python
