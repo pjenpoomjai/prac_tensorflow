@@ -20,11 +20,14 @@ Depending in your Python environment the pip command might be different.
   https://drive.google.com/open?id=1s08at34mdoWEvIkpunnSmiicE__7VmvJ
   
 ## Extract dataset
-  create folder images
-  
-    /images
-      /cat
-      /dog
+  Given the following directory structure:
+    images:
+    |---cat
+    |     |---persia.png
+    |     |---...
+    |---dog
+    |     |---dog1.png
+    |     |---...
       
 ## train the model
   python train.py
