@@ -21,6 +21,7 @@ Depending in your Python environment the pip command might be different.
   
 ## Extract dataset
   Given the following directory structure:
+  ```
     images:
     |---cat
     |     |---persia.png
@@ -28,6 +29,7 @@ Depending in your Python environment the pip command might be different.
     |---dog
     |     |---dog1.png
     |     |---...
+   ```
       
 ## train the model
   python train.py
