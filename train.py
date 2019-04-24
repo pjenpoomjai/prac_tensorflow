@@ -45,7 +45,7 @@ else:
         if i.endswith('.png') or i.endswith('.jpg'):
             c = cv2.imread(catPath+'/'+i,0)
             print(c.shape)
-            c = cv2.resize(c,(28,28))
+            c = cv2.resize(c,(300,300))
             print(c.shape)
             cv2.imshow('cat',c)
             cv2.waitKey(500)
@@ -65,7 +65,7 @@ else:
         if i.endswith('.png') or i.endswith('.jpg'):
             c = cv2.imread(dogPath+'/'+i,0)
             print(c.shape)
-            c = cv2.resize(c,(28,28))
+            c = cv2.resize(c,(300,300))
             print(c.shape)
             cv2.imshow('dog',c)
             cv2.waitKey(500)
@@ -94,7 +94,8 @@ testImages = testImages / 255.0
 
 
 model = keras.Sequential([
-    keras.layers.Flatten(input_shape=(28, 28)),
+    keras.layers.Flatten(input_shape=(300, 300)),
+    keras.layers.Dense(128, activation=tf.nn.relu),
     keras.layers.Dense(128, activation=tf.nn.relu),
     keras.layers.Dropout(0.5),
     keras.layers.Dense(32, activation=tf.nn.relu),
@@ -114,10 +115,11 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(
     period=5)
 model.save_weights(checkpoint_path.format(epoch=0))
 # model.load_weights('./model/cp-0300.ckpt')  #initial_epoch=300
-model.fit(trainImages, trainLabels, epochs=100,callbacks = [cp_callback])
+model.fit(trainImages, trainLabels, epochs=500,callbacks = [cp_callback])
 
 test_loss, test_acc = model.evaluate(testImages, testLabels)
 print('Test accuracy:', test_acc)
+
 
 
 # predictions = model.predict(testImages)
