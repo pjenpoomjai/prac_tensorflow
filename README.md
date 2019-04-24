@@ -4,14 +4,15 @@
 
 ## Setup
   ### Prerequisites
-   - Python version 3.6.6
+   - Python version 3.6.5
+   https://www.python.org/downloads/release/python-365/
    
 ### Installation
 
 To install all dependencies run the following command:
 
 ```
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
 Depending in your Python environment the pip command might be different.
 ```
