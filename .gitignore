@@ -1,2 +1,6 @@
 images/*
 model/*
+dataset.cache
+*.mp4
+*.rar
+screens/*
