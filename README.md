@@ -18,7 +18,7 @@ Depending in your Python environment the pip command might be different.
 ```
   
 ## Download dataset from this link
-  https://drive.google.com/file/d/1KZIsDzf8v8gy7wFuwEnDmoyLRfWshG8Y/view?usp=sharing
+  https://drive.google.com/open?id=1OMoxmmEjPPH7WkrfBMn1Du2ICShX0g8j
   
 ## Extract dataset
   Given the following directory structure:
