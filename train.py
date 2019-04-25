@@ -6,7 +6,6 @@ import numpy as np
 import pickle
 import matplotlib.pyplot as plt
 import cv2
-# (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 import os
 
 def read_dataset(datasetPath):
@@ -41,16 +40,15 @@ else:
     #cat
     number = 0
     for i in os.listdir(catPath):
-        print(i)
         if i.endswith('.png') or i.endswith('.jpg'):
-            c = cv2.imread(catPath+'/'+i,0)
+            c = cv2.imread(catPath+'/'+i,1)
             print(c.shape)
-            c = cv2.resize(c,(100,100))
+            c = cv2.resize(c,(28,28))
             print(c.shape)
             cv2.imshow('cat',c)
             cv2.waitKey(500)
             
-            if number <130:
+            if number <120:
                 trainImages.append(c)
                 trainLabels.append(0)
             else:
@@ -61,15 +59,14 @@ else:
     #dog
     number = 0
     for i in os.listdir(dogPath):
-        print(i)
         if i.endswith('.png') or i.endswith('.jpg'):
-            c = cv2.imread(dogPath+'/'+i,0)
+            c = cv2.imread(dogPath+'/'+i,1)
             print(c.shape)
-            c = cv2.resize(c,(100,100))
+            c = cv2.resize(c,(28,28))
             print(c.shape)
             cv2.imshow('dog',c)
             cv2.waitKey(500)
-            if number <130:
+            if number <120:
                 trainImages.append(c)
                 trainLabels.append(1)
             else:
@@ -85,22 +82,36 @@ testI = testImages
 testImages = np.array(testImages)
 testLabels = np.array(testLabels)
 
-
-
 trainImages = trainImages / 255.0
 testImages = testImages / 255.0
 
+# model= keras.Sequential([
+#     keras.layers.Convolution2D(filters=32,kernel_size=3,activation="relu",input_shape=(28,28,3)),
+#     keras.layers.Convolution2D(filters=32,kernel_size=3,activation="relu"),
+#     keras.layers.MaxPooling2D(pool_size=2),
+#     keras.layers.Dropout(0.5),
 
+#     # keras.layers.Convolution2D(filters=64,kernel_size=3,activation="relu"),
+#     # keras.layers.Convolution2D(filters=64,kernel_size=3,activation="relu"),
+#     # keras.layers.MaxPooling2D(pool_size=2),
+#     # keras.layers.Dropout(0.5),
 
+#     keras.layers.Convolution2D(filters=64,kernel_size=3,activation="relu"),
+#     keras.layers.Convolution2D(filters=64,kernel_size=3,activation="relu"),
+#     keras.layers.MaxPooling2D(pool_size=2),
+#     keras.layers.Dropout(0.5),
+
+#     keras.layers.Flatten(),
+#     keras.layers.Dense(512,activation="relu"),
+#     keras.layers.Dropout(0.5),
+#     keras.layers.Dense(2, activation=tf.nn.softmax)
+# ])
 
 model = keras.Sequential([
-    keras.layers.Flatten(input_shape=(100, 100)),
-    keras.layers.Dense(256, activation=tf.nn.relu),
-    keras.layers.Dropout(0.25),
-    keras.layers.Dense(128, activation=tf.nn.relu),
-    
-    keras.layers.Dense(32, activation=tf.nn.relu),
-    #keras.layers.Dropout(0.25),
+    keras.layers.Flatten(input_shape=(28,28,3)),
+    keras.layers.Dense(128, activation=tf.nn.relu),    
+    keras.layers.Dense(16, activation=tf.nn.relu),    
+    keras.layers.Dropout(0.2),
     keras.layers.Dense(2, activation=tf.nn.softmax)
 ])
 
@@ -112,25 +123,14 @@ model.compile(optimizer='adam',
 checkpoint_path = "model/cp-{epoch:04d}.ckpt"
 cp_callback = tf.keras.callbacks.ModelCheckpoint(
     checkpoint_path, verbose=1, save_weights_only=True,
-    # Save weights, every 10-epochs.
+    # Save weights, every 5-epochs.
     period=10)
+model.save_weights(checkpoint_path.format(epoch=0))
 # model.load_weights('./model/cp-0300.ckpt')  #initial_epoch=300
-model.fit(trainImages, trainLabels, epochs=200,callbacks = [cp_callback])
+model.fit(trainImages, trainLabels, epochs=80,callbacks = [cp_callback])
 
 test_loss, test_acc = model.evaluate(testImages, testLabels)
 print('Test accuracy:', test_acc)
-
-
-
-# predictions = model.predict(testImages)
-# model.load_weights('./model/cp-0040.ckpt')
-# p =0
-# for i in predictions:
-#     cv2.imshow('result',testImages[p])
-#     cv2.waitKey(2000)
-#     print('predic :',class_names[np.argmax(i)],'(True',testLabels[p],')')
-#     p+=1
-
 
 
 
