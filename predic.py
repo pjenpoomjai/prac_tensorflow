@@ -7,7 +7,7 @@ import os
 class_names = ['cat','dog']
 dirname = os.path.dirname(__file__)
 video_name = 'a.mp4'
-video_path = os.path.join(dirname, video_name)
+video_path = os.path.join(dirname,'images', video_name)
 
 with tf.Session() as sess:
 #     model= keras.Sequential([
