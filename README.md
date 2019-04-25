@@ -34,3 +34,6 @@ Depending in your Python environment the pip command might be different.
       
 ## train the model
   python train.py
+
+## predic
+  python predic.py
