@@ -32,13 +32,12 @@ trainLabels = []
 testLabels = []
 class_names = ['cat','dog']
 
-cache = 1
+cache = 0
 datasetPath = 'dataset'
 if cache == 1:
     trainImages,trainLabels,testImages,testLabels = read_dataset(datasetPath)
 else:
     #cat
-    number = 0
     for i in os.listdir(catPath):
         if i.endswith('.png') or i.endswith('.jpg'):
             c = cv2.imread(catPath+'/'+i,1)
@@ -48,17 +47,10 @@ else:
             print(c.shape)
             cv2.imshow('cat',c)
             cv2.waitKey(500)
-            
-            if number <120:
-                trainImages.append(c)
-                trainLabels.append(0)
-            else:
-                
-                testImages.append(c)
-                testLabels.append(0)
+            trainImages.append(c)
+            trainLabels.append(0)
             number+=1    
     #dog
-    number = 0
     for i in os.listdir(dogPath):
         if i.endswith('.png') or i.endswith('.jpg'):
             c = cv2.imread(dogPath+'/'+i,1)
@@ -68,21 +60,17 @@ else:
             print(c.shape)
             cv2.imshow('dog',c)
             cv2.waitKey(500)
-            if number <120:
-                trainImages.append(c)
-                trainLabels.append(1)
-            else:
-                testImages.append(c)
-                testLabels.append(1)
+            trainImages.append(c)
+            trainLabels.append(1)
             number+=1    
     build_dataset(trainImages,trainLabels,testImages,testLabels,datasetPath)
 
 
-trainImages = np.array(trainImages)        
-trainLabels = np.array(trainLabels)        
+trainImages = np.array(trainImages[:120])        
+trainLabels = np.array(trainLabels[:120])        
 testI = testImages
-testImages = np.array(testImages)
-testLabels = np.array(testLabels)
+testImages = np.array(testImages[120:])
+testLabels = np.array(testLabels[120:])
 
 trainImages = trainImages / 255.0
 testImages = testImages / 255.0
