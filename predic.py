@@ -47,11 +47,16 @@ video_capture = cv2.VideoCapture(video_path)
 for i in os.listdir(os.path.join(dirname,'images')):
     if i.endswith('png') or i.endswith('jpg'):
         c = cv2.imread(os.path.join(dirname,'images',i),1)
+        original = c
         c = cv2.resize(c,(28,28))
         c = np.array(c)
         newFrame = np.array([c]) /255.0
         predictions = model.predict(newFrame)
-        print(class_names[np.argmax(predictions)])
+        animal = class_names[np.argmax(predictions)]
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(original,"%s"%animal,(10,500), font, 1,(0,255,0),2)
+        cv2.imshow('show',original)
+        cv2.waitKey(0)
 
 # #frameRate = video_capture.get(5) #frame rate
 # while True:  # fps._numFrames < 120
