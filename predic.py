@@ -48,6 +48,7 @@ with tf.Session() as sess:
         if i.endswith('png') or i.endswith('jpg'):
             c = cv2.imread(os.path.join(dirname,'images',i),1)
             c = cv2.resize(c,(28,28))
+	    c = np.array(c)
             newFrame = np.array([c]) /255.0
             predictions = model.predict(newFrame)
             print(class_names[np.argmax(predictions)])
@@ -60,6 +61,7 @@ with tf.Session() as sess:
     #     print(frame.shape)
     #     newFrame = cv2.resize(frame,(28,28))
     #     print(newFrame.shape)
+    #     newFrame = np.array(newFrame)
     #     newFrame = np.array([newFrame]) /255.0
     #     predictions = model.predict(newFrame)
     #     font = cv2.FONT_HERSHEY_SIMPLEX
