@@ -48,8 +48,7 @@ else:
             cv2.imshow('cat',c)
             cv2.waitKey(500)
             trainImages.append(c)
-            trainLabels.append(0)
-            number+=1    
+            trainLabels.append(0) 
     #dog
     for i in os.listdir(dogPath):
         if i.endswith('.png') or i.endswith('.jpg'):
@@ -62,7 +61,6 @@ else:
             cv2.waitKey(500)
             trainImages.append(c)
             trainLabels.append(1)
-            number+=1    
     build_dataset(trainImages,trainLabels,testImages,testLabels,datasetPath)
 
 
