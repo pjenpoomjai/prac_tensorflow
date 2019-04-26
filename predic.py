@@ -56,7 +56,11 @@ for i in os.listdir(os.path.join(dirname,'images')):
         font = cv2.FONT_HERSHEY_SIMPLEX
         cv2.putText(original,"%s"%animal,(10,500), font, 1,(0,255,0),2)
         cv2.imshow('show',original)
-        cv2.waitKey(0)
+        while True:
+                if cv2.waitKey(0) & 0xff == ord('q'):
+                        cv2.destroyAllWindows()
+                        break
+
 
 # #frameRate = video_capture.get(5) #frame rate
 # while True:  # fps._numFrames < 120
