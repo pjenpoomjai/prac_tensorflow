@@ -1,6 +1,5 @@
-numpy
+numpy==1.16.3
 tensorflow==1.10
 cloudpickle
 matplotlib
-keras
 opencv-python
