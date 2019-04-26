@@ -43,6 +43,7 @@ model.compile(optimizer='adam',
             metrics=['accuracy'])
 model.load_weights('./model/cp-0080.ckpt')
 video_capture = cv2.VideoCapture(video_path)
+
 for i in os.listdir(os.path.join(dirname,'images')):
     if i.endswith('png') or i.endswith('jpg'):
         c = cv2.imread(os.path.join(dirname,'images',i),1)
