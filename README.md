@@ -19,8 +19,8 @@ When you already installed
     import tensorflow
     
 if "import tensorflow" has a problem like this : DDL Error
-download this one to fix
-  https://www.microsoft.com/en-us/download/confirmation.aspx?id=53587
+  download this one to fix:
+        https://www.microsoft.com/en-us/download/confirmation.aspx?id=53587
 ```
 
 
