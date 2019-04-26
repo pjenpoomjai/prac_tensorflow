@@ -1,5 +1,5 @@
 numpy
-tensorflow
+tensorflow==1.10
 cloudpickle
 matplotlib
 keras
