@@ -14,8 +14,11 @@ To install all dependencies run the following command:
 ```
 python -m pip install -r requirements.txt
 
-Depending in your Python environment the pip command might be different.
-if import tensorflow has a problem like this : DDL Error
+When you already installed
+  try
+    import tensorflow
+    
+if "import tensorflow" has a problem like this : DDL Error
 download this one to fix
   https://www.microsoft.com/en-us/download/confirmation.aspx?id=53587
 ```
